@@ -19,7 +19,7 @@ class AssetLoader {
     ];
 
     const loadPromises = imagePaths.map(path => {
-      return new Promise<void>((resolve, reject) => {
+      return new Promise<void>((resolve) => {
         const img = new Image();
         img.onload = () => {
           const name = path.split('/').pop()?.replace('.png', '') || 'unknown';

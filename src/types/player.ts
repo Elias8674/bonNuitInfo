@@ -3,19 +3,21 @@
 export type AttackType = 'light' | 'medium' | 'heavy';
 export type ActionType = 'grab' | 'attack' | 'defend';
 
-export enum PlayerState {
-  IDLE = 'idle',
-  WALKING = 'walking',
-  ATTACKING = 'attacking',
-  PUSHING = 'pushing',
-  HIT = 'hit',
-  GETTING_UP = 'gettingUp',
-  ROLLING = 'rolling',
-  SUPER_ATTACKING = 'superAttacking',
-  GRAB_THROWING = 'grabThrowing',
-  DEFENDING = 'defending',
-  JUMPING = 'jumping',
-}
+export const PlayerState = {
+  IDLE: 'idle',
+  WALKING: 'walking',
+  ATTACKING: 'attacking',
+  PUSHING: 'pushing',
+  HIT: 'hit',
+  GETTING_UP: 'gettingUp',
+  ROLLING: 'rolling',
+  SUPER_ATTACKING: 'superAttacking',
+  GRAB_THROWING: 'grabThrowing',
+  DEFENDING: 'defending',
+  JUMPING: 'jumping',
+} as const;
+
+export type PlayerState = typeof PlayerState[keyof typeof PlayerState];
 
 export interface Player {
   x: number;

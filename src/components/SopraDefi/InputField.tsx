@@ -1,5 +1,5 @@
 // src/components/InputField.tsx
-import { useState, KeyboardEvent } from 'react';
+import { useState, type KeyboardEvent } from 'react';
 
 interface InputFieldProps {
   onSearchStart: (query: string) => void;

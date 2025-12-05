@@ -68,7 +68,7 @@ export class GameEngine {
   }
 
   private updatePlayer(keys: Set<string>): void {
-    const blockingStates = [
+    const blockingStates: PlayerState[] = [
       PlayerState.HIT,
       PlayerState.GETTING_UP,
       PlayerState.GRAB_THROWING,
