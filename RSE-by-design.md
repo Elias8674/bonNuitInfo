@@ -41,5 +41,11 @@ En synthèse, le RSE by Design est un levier de performance et de résilience. I
   - Pas de vidéos auto-lancées, pas de tracking, pas de cookies
   - Fonctionnalités pensées pour l’utilité réelle, pas de surenchère technique
 
+  4. Impact Sociétal et Pédagogie Numérique Au-delà de sa fonction technique, le projet bonNuitInfo se positionne comme un vecteur de transformation des consciences. L'outil n'est pas une fin en soi, mais un moyen d'éducation populaire au numérique responsable.
+
+    Ludification au service de la conscience (Gamification) : L'intégration de diagnostics interactifs et de mini-jeux vise à vulgariser des concepts complexes (empreinte carbone, tracking publicitaire) pour les rendre intelligibles aux publics non-experts.
+
+    Sobriété Éditoriale : Chaque contenu produit est évalué selon sa pertinence. Nous refusons la stratégie du « contenu de remplissage » (content spinning) pour privilégier une information dense, vérifiée et durable, luttant ainsi contre l'infobésité.
+
 Nous avons cherché à réaliser un site web réellement utile servant une cause importante (un numérique plus inclusif, responsable et durable qui s'affranchit des Big Tech). Tout en prenant soin durant la réalisation de limiter notre impact environnemental et de le rendre accessible à tous.
 L'intégration de plusieurs outils (diagnostic et mini-jeux) sert aussi à rendre le tout plus clair et accessible auprès d'un public plus large et non expert.
