@@ -1,0 +1,141 @@
+/* src/pages/diagnostic/diagnostic.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+/* src/pages/diagnostic/diagnostic.css */
+
+/* Nouveau : Conteneur principal pour gérer la superposition */
+.diagnostic_container {
+    position: relative; /* Contexte de positionnement pour les enfants */
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+/* Nouveau : S'assure que le SVG s'adapte au conteneur */
+.diagnostic_container_image svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Redimensionne le SVG pour couvrir l'espace */
+}
+
+.diagnostic_container_content {
+    width: 100%;
+    height: 100%;
+
+    padding-left: 140px;
+    padding-top: 200px;
+}
+
+
+
+.diagnostic_title_principal {
+    color: #000;
+    font-family: 'Inter', sans-serif;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-bottom: 24px; /* Ajout d'un espace sous le titre */
+}
+
+.diagnostic_text_base {
+    color: #000;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-bottom: 16px; /* Ajout d'un espace sous le compteur de questions */
+}
+
+/* Conteneur pour les options */
+.diagnostic_options_container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px; /* Espace entre les options */
+}
+
+/* Style de base pour une option */
+.diagnostic_option {
+    display: flex;
+    width: 203px;
+    padding: 20px 15px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
+
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    background: #FFF;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* Style au survol pour une option non sélectionnée */
+.diagnostic_option:not(.diagnostic_option--selected):hover {
+    background: #e6e6e6;
+}
+
+/* Style pour une option sélectionnée */
+.diagnostic_option--selected {
+    background: #000000;
+    color: #ffffff;
+}
+
+/* Style du label de l'option */
+.diagnostic_option_label {
+    font-weight: bold;
+    font-size: 16px;
+    color: #212529;
+}
+
+/* Style du label quand l'option est sélectionnée */
+.diagnostic_option--selected .diagnostic_option_label {
+    color: #ffffff;
+}
+
+/* Marge sous le label s'il y a une description */
+.diagnostic_option_label--with-hint {
+    margin-bottom: 8px;
+}
+
+/* Style de la description (hint) */
+.diagnostic_option_hint {
+    font-size: 14px;
+    color: #6c757d;
+    font-style: italic;
+}
+
+/* Conteneur pour les boutons de navigation */
+.diagnostic_navigation {
+    margin-top: 24px;
+    display: flex;
+    gap: 12px; /* Espace entre les boutons */
+}
+
+/* Style de base pour les boutons */
+.diagnostic_button {
+    display: inline-flex;
+    padding: 10px 15px;
+    align-items: flex-start;
+    gap: 10px;
+    border-radius: 5px;
+    background: #000;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    color: #FFF;
+}
+
+.diagnostic_button:hover {
+    background-color: #202020;
+}
+
+.diagnostic_button:disabled {
+    background-color: #b6b6b6;
+    cursor: not-allowed;
+}
+
+

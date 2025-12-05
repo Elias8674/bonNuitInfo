@@ -1,0 +1,147 @@
+[
+  {
+    "id": "usage_principal",
+    "label": "Usage principal",
+    "options": [
+      {
+        "id": "bureautique",
+        "label": "Bureautique simple (Word, Excel, PDF…)",
+        "hint": "Linux / Windows"
+      },
+      {
+        "id": "metier_legers",
+        "label": "Applicatifs métier légers",
+        "hint": "Linux / Windows"
+      },
+      {
+        "id": "metier_lourds",
+        "label": "Applicatifs lourds (CAO, graphisme, vidéo…)",
+        "hint": "Windows si besoin de logiciels spécifiques ou Linux"
+      },
+      {
+        "id": "pedagogique",
+        "label": "Usage pédagogique basique (navigateur, suites libres)",
+        "hint": "Linux / Windows"
+      }
+    ]
+  },
+
+  {
+    "id": "logiciels_indispensables",
+    "label": "Logiciels indispensables",
+    "options": [
+      {
+        "id": "office_local",
+        "label": "Suite Microsoft Office (local)",
+        "hint": "Windows 11"
+      },
+      {
+        "id": "office_365",
+        "label": "Office 365 (web)",
+        "hint": "Linux ou Windows"
+      },
+      {
+        "id": "windows_only",
+        "label": "Logiciels propriétaires Windows uniquement",
+        "hint": "Windows"
+      },
+      {
+        "id": "multiplateforme",
+        "label": "Logiciels multiplateformes (LibreOffice, navigateur…)",
+        "hint": "Linux / Windows"
+      },
+      {
+        "id": "aucun",
+        "label": "Aucun besoin spécifique",
+        "hint": "Linux / Windows"
+      }
+    ]
+  },
+
+  {
+    "id": "os_actuel",
+    "label": "Système d’exploitation actuel",
+    "options": [
+      {
+        "id": "win10",
+        "label": "Windows 10",
+        "hint": "Migrer sur Windows 11. Sinon support ou Linux"
+      },
+      {
+        "id": "win11",
+        "label": "Windows 11",
+        "hint": "Rien"
+      },
+      {
+        "id": "win7_8",
+        "label": "Windows 7 / 8",
+        "hint": "Migrer sur Windows 11. Sinon support ou Linux"
+      },
+      {
+        "id": "linux",
+        "label": "Linux",
+        "hint": "Rien"
+      },
+      {
+        "id": "autre",
+        "label": "Autre",
+        "hint": "Migrer sur Windows 11 ou Linux"
+      },
+      {
+        "id": "mac",
+        "label": "Mac",
+        "hint": "Windows 11 ou Linux"
+      }
+    ]
+  },
+
+  {
+    "id": "age_pc",
+    "label": "Âge du PC",
+    "options": [
+      {
+        "id": "moins_3",
+        "label": "Moins de 3 ans",
+        "hint": "Migrer sous Windows 11"
+      },
+      {
+        "id": "3_5",
+        "label": "Entre 3 et 5 ans",
+        "hint": "Migrer sur Windows 11. Sinon support ou Linux"
+      },
+      {
+        "id": "5_8",
+        "label": "Entre 5 et 8 ans",
+        "hint": "Migrer sur Windows 11 ou Linux / Upgrade si besoin"
+      },
+      {
+        "id": "plus_8",
+        "label": "Plus de 8 ans",
+        "hint": "Linux ou rachat matériel / Upgrade"
+      }
+    ]
+  },
+
+  {
+    "id": "budget",
+    "label": "Budget disponible",
+    "options": [
+      {
+        "id": "tres_faible",
+        "label": "Très faible (0–50€ par poste)"
+      },
+      {
+        "id": "faible",
+        "label": "Faible (50–200€)"
+      },
+      {
+        "id": "moyen",
+        "label": "Moyen (200–500€)"
+      },
+      {
+        "id": "complet",
+        "label": "Permettant remplacement complet"
+      }
+    ]
+  }
+]

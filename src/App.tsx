@@ -21,6 +21,14 @@ function App() {
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
+import Diagnostic from './pages/diagnostic/Diagnostic.tsx';
+
+function App() {
+  return (
+    // Suppression du background noir ici pour permettre la transparence
+    <div className="app-container" style={{width: '100vw', height: '100vh', overflow: 'hidden'}}>
+      <Diagnostic />
+    </div>
   );
 }
 
