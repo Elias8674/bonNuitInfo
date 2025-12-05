@@ -21,6 +21,8 @@
 }
 
 .diagnostic_container_content {
+    width: 100%;
+    height: 100%;
 
     padding-left: 140px;
     padding-top: 200px;

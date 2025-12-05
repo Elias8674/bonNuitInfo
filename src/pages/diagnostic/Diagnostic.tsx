@@ -3,6 +3,7 @@ import './diagnostic.css';
 import questionsData from '../../data/questions.json';
 import rulesData from '../../data/rules.json';
 import ServiceDiagnostic from '../../services/ServiceDiagnostic.tsx';
+import Rapport from '../rapport/Rapport';
 
 type Option = { id: string; label: string; hint?: string };
 type Question = { id: string; label: string; options: Option[] };
@@ -48,39 +49,13 @@ const Diagnostic = () => {
     };
 
     if (showResults) {
-        return (
-            <div className={"diagnostic_container_content"}>
-                <h2 className={"diagnostic_title_principal"}>Résultats du Diagnostic</h2>
-                {results.length > 0 ? (
-                    <ul>
-                        {results.map((result, index) => (
-                            <li key={index} className={"diagnostic_text_base"}>{result}</li>
-                        ))}
-                    </ul>
-                ) : (
-                    <p className={"diagnostic_text_base"}>Aucune recommandation spécifique trouvée pour vos réponses.</p>
-                )}
-                <button className={"diagnostic_button"} onClick={() => setShowResults(false)}>Retour aux questions</button>
-            </div>
-        );
+        return <Rapport results={results} onBack={() => setShowResults(false)} />;
     }
+
 
     return (
         <div className={"diagnostic_container"}>
-            <div className={"diagnostic_container_image"}>
-                <svg width="986" height="952" viewBox="0 0 986 952" fill="none" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
-                    <rect width="986" height="952" fill="url(#pattern0_19_359)"/>
-                    <defs>
-                        <pattern id="pattern0_19_359" patternUnits="userSpaceOnUse" patternTransform="matrix(283.601 0 0 76.9088 0 0)" preserveAspectRatio="none" viewBox="0 0 143.96 39.04" width="1" height="1">
-                            <use xlinkHref="#pattern0_19_359_inner" transform="translate(0 -39.04)"/>
-                            <use xlinkHref="#pattern0_19_359_inner" transform="translate(71.98 -19.52)"/>
-                            <g id="pattern0_19_359_inner">
-                                <path d="M0 29.5C0 13.2076 13.2076 0 29.5 0C45.7924 0 59 13.2076 59 29.5V32H0V29.5Z" fill="#FF12B8" fill-opacity="0.14"/>
-                            </g>
-                            <use xlinkHref="#pattern0_19_359_inner" transform="translate(71.98 19.52)"/>
-                        </pattern></defs>
-                </svg>
-            </div>
+
             <div className={"diagnostic_container_content"}>
                 <div className={"diagnostic_text_base"}>Question {question + 1} / {nbQuestions}</div>
 
