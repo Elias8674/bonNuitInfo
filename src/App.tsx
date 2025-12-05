@@ -1,7 +1,7 @@
 // src/App.tsx
 import './App.css';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import Diagnostic from './pages/diagnostic/Diagnostic.tsx';
+import LandingPage from './pages/LandingPage';
 import { HexRTSCanvas } from './components/Game/HexRTSCanvas';
 
 function App() {
@@ -9,8 +9,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={
-          <div className="app-container" style={{width: '100vw', height: '100vh', overflow: 'hidden'}}>
-        <Diagnostic />
+          <div className="app-container" style={{width: '100vw', minHeight: '100vh', overflow: 'auto'}}>
+        <LandingPage />
       </div>
         } />
         <Route path="/rts" element={

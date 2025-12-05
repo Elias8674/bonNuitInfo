@@ -19,7 +19,7 @@ export default function Footer() {
           {/* Section droite - Partenaire */}
           <div className="footer-section footer-partner">
             <h4 className="footer-section-title">Partenaire</h4>
-            <a href="https://www.decathlon.fr" target="_blank" rel="noopener noreferrer" className="partner-link">
+            <a href="http://5.83.147.213:3000" target="_blank" rel="noopener noreferrer" className="partner-link">
               <div className="partner-badge">
                 <span className="decathlon-text">DECATHLON</span>
                 <span className="decathlon-tagline">READY TO PLAY?</span>
@@ -44,3 +44,4 @@ export default function Footer() {
     </footer>
   );
 }
+

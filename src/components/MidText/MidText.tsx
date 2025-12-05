@@ -3,7 +3,7 @@ import ensemble from '../../assets/imageEnsemble.png';
 
 export default function MidText() {
   return (
-    <section className="midtext">
+    <section className="midtext" style={{ position: 'relative', zIndex: 1 }}>
       <div className="midtext-container">
         <img src={ensemble} alt="ensemble" className="midtext-ensemble" />
         <h2 className="midtext-title">
@@ -17,3 +17,4 @@ export default function MidText() {
     </section>
   );
 }
+

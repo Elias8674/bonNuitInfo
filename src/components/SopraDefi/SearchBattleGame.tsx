@@ -1,10 +1,14 @@
-// src/components/SearchBattleGame.tsx
+// src/components/SopraDefi/SearchBattleGame.tsx
 import { useState } from 'react';
 import { GameCanvas } from './GameCanvas';
 import { FZeroCanvas } from './FZeroCanvas';
 import { OperationCanvas } from './OperationCanvas';
 import { InputField } from './InputField';
-import { findMatches } from '../../utils/searchLogic';
+import { findMatches, type OpenSourceTool } from '../../utils/searchLogic';
+import '../NIRDBloc/NIRDBloc.css';
+import pinkImg from '../../assets/pinkUpBloc.png';
+import yellowImg from '../../assets/yellowUpBloc.png';
+import blueImg from '../../assets/blueUpBloc.png';
 
 type GameStage = 'input' | 'fighting' | 'racing' | 'operation' | 'result';
 
@@ -85,14 +89,20 @@ const ControlsHUD = ({ stage }: { stage: GameStage }) => {
 };
 
 // --- COMPOSANT MAÎTRE ---
-export const SearchBattleGame = () => {
+interface SearchBattleGameProps {
+  onSearchStart?: () => void;
+  onSearchEnd?: () => void;
+}
+
+export const SearchBattleGame = ({ onSearchStart, onSearchEnd }: SearchBattleGameProps) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [gameStage, setGameStage] = useState<GameStage>('input');
-  const [results, setResults] = useState<string[]>([]);
+  const [results, setResults] = useState<OpenSourceTool[]>([]);
 
   const handleSearchStart = (query: string) => {
     setSearchQuery(query);
     setGameStage('racing');
+    onSearchStart?.();
   };
 
   const handleRaceWin = () => setGameStage('fighting');
@@ -108,21 +118,25 @@ export const SearchBattleGame = () => {
     alert("ÉCHEC MISSION.");
     setGameStage('input');
     setSearchQuery('');
+    onSearchEnd?.();
   };
 
   const resetGame = () => {
     setGameStage('input');
     setSearchQuery('');
     setResults([]);
+    onSearchEnd?.();
   };
 
   return (
     <div style={{
       width: '100%', 
-      height: '100%', 
+      height: gameStage === 'input' ? 'auto' : '100%', 
       position: 'relative', 
-      overflow: 'hidden', 
-      background: gameStage === 'input' ? 'transparent' : '#000'
+      overflow: gameStage === 'input' ? 'visible' : 'hidden', 
+      background: gameStage === 'input' ? 'transparent' : '#000',
+      minHeight: gameStage === 'input' ? 'auto' : '100vh',
+      zIndex: gameStage === 'input' ? 0 : 10
     }}>
       
       {/* BACKGROUND TEXT FOR F-ZERO (Visible au-dessus du canvas) */}
@@ -179,41 +193,86 @@ export const SearchBattleGame = () => {
 
       {/* 3. RÉSULTAT */}
       {gameStage === 'result' && (
-        <div style={{
-          display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-          height: '100%', background: '#111', color: '#fff', fontFamily: 'Arial, sans-serif'
-        }}>
-          <h2 style={{color: '#888', marginBottom: '30px', letterSpacing: '2px'}}>RÉSULTATS</h2>
-          <ul style={{
-            listStyle: 'none', padding: 0, width: '600px',
-            background: '#222', borderRadius: '12px', overflow: 'hidden',
-            boxShadow: '0 10px 40px rgba(0,0,0,0.5)'
-          }}>
-            {results.map((res, i) => (
-              <li key={i} style={{
-                padding: '25px 30px', 
-                borderBottom: i < results.length - 1 ? '1px solid #333' : 'none',
-                fontSize: '24px', display: 'flex', justifyContent: 'space-between',
-                cursor: 'pointer', transition: 'background 0.2s'
-              }}
-              onMouseOver={(e) => e.currentTarget.style.background = '#333'}
-              onMouseOut={(e) => e.currentTarget.style.background = 'transparent'}
+        <section className="nird" style={{ padding: '3rem 2rem', background: 'transparent', minHeight: '100vh' }}>
+          <div className="nird-container">
+            <h3 className="nird-title">Outils open source trouvés</h3>
+            {results.length > 0 ? (
+              <div className="nird-grid">
+                {results.map((tool, i) => {
+                  const cardColors = ['nird-card--pink', 'nird-card--yellow', 'nird-card--blue'];
+                  const cardImages = [pinkImg, yellowImg, blueImg];
+                  const colorClass = cardColors[i % cardColors.length];
+                  const cardImage = cardImages[i % cardImages.length];
+                  
+                  return (
+                    <article key={i} className={`nird-card ${colorClass}`}>
+                      <div className="nird-top">
+                        <img src={cardImage} alt={`motif ${colorClass}`} className="nird-top-img" />
+                      </div>
+                      <div className="nird-body">
+                        <p className="nird-text" style={{ fontWeight: '700', marginBottom: '8px' }}>
+                          {tool.name}
+                        </p>
+                        <p className="nird-text" style={{ fontSize: '16px', fontWeight: '400', marginTop: '8px' }}>
+                          {tool.description}
+                        </p>
+                        <p style={{ 
+                          fontSize: '14px', 
+                          color: '#666', 
+                          marginTop: '12px',
+                          fontFamily: 'Inter, sans-serif'
+                        }}>
+                          {tool.category}
+                        </p>
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
+            ) : (
+              <p style={{ 
+                textAlign: 'center', 
+                color: '#666', 
+                fontFamily: 'Inter, sans-serif',
+                fontSize: '18px',
+                padding: '2rem'
+              }}>
+                Aucun outil trouvé pour "{searchQuery}"
+              </p>
+            )}
+            <div style={{ 
+              display: 'flex', 
+              justifyContent: 'center', 
+              marginTop: '3rem' 
+            }}>
+              <button 
+                onClick={resetGame}
+                style={{
+                  padding: '15px 40px', 
+                  fontSize: '16px',
+                  background: 'transparent', 
+                  color: '#000', 
+                  border: '2px solid #000',
+                  borderRadius: '50px', 
+                  cursor: 'pointer', 
+                  fontWeight: 'bold',
+                  fontFamily: 'Inter, sans-serif',
+                  transition: 'all 0.2s'
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.background = '#000';
+                  e.currentTarget.style.color = '#fff';
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.background = 'transparent';
+                  e.currentTarget.style.color = '#000';
+                }}
               >
-                <span style={{color: '#0f0', fontWeight: 'bold'}}>{res}</span>
-              </li>
-            ))}
-          </ul>
-          <button 
-            onClick={resetGame}
-            style={{
-              marginTop: '50px', padding: '15px 40px', fontSize: '16px',
-              background: 'transparent', color: '#0f0', border: '2px solid #0f0',
-              borderRadius: '50px', cursor: 'pointer', fontWeight: 'bold'
-            }}
-          >
-            RETOUR
-          </button>
-        </div>
+                Nouvelle recherche
+              </button>
+            </div>
+          </div>
+        </section>
       )}
 
       <ControlsHUD stage={gameStage} />

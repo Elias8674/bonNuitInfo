@@ -1,28 +1,58 @@
 // src/utils/searchLogic.ts
 
-// Liste élargie de cibles potentielles pour la démo
-export const SEARCH_TARGETS = [
-    'linux', 'windows', 'macOS', 
-    'ubuntu', 'debian', 'arch', 
-    'android', 'ios', 'chromeos',
-    'firefox', 'chrome', 'safari'
-  ];
+export interface OpenSourceTool {
+  name: string;
+  description: string;
+  category: string;
+}
+
+// Liste d'outils open source avec leurs descriptions
+export const OPEN_SOURCE_TOOLS: OpenSourceTool[] = [
+  { name: 'LibreOffice', description: 'Suite bureautique complète alternative à Microsoft Office', category: 'Bureautique' },
+  { name: 'Firefox', description: 'Navigateur web respectueux de la vie privée', category: 'Navigateur' },
+  { name: 'Linux', description: 'Système d\'exploitation libre et open source', category: 'OS' },
+  { name: 'Ubuntu', description: 'Distribution Linux conviviale et populaire', category: 'OS' },
+  { name: 'GIMP', description: 'Éditeur d\'images professionnel gratuit', category: 'Graphisme' },
+  { name: 'Blender', description: 'Logiciel de modélisation 3D et animation', category: 'Graphisme' },
+  { name: 'VLC', description: 'Lecteur multimédia universel', category: 'Multimédia' },
+  { name: 'Audacity', description: 'Éditeur audio gratuit et open source', category: 'Audio' },
+  { name: 'OBS Studio', description: 'Logiciel de streaming et enregistrement vidéo', category: 'Multimédia' },
+  { name: 'Thunderbird', description: 'Client de messagerie électronique', category: 'Communication' },
+  { name: 'VS Code', description: 'Éditeur de code source développé par Microsoft (open source)', category: 'Développement' },
+  { name: 'Git', description: 'Système de contrôle de version distribué', category: 'Développement' },
+  { name: 'Inkscape', description: 'Éditeur de graphiques vectoriels', category: 'Graphisme' },
+  { name: 'Krita', description: 'Application de peinture numérique', category: 'Graphisme' },
+  { name: 'Mozilla', description: 'Organisation à but non lucratif pour un web libre', category: 'Organisation' },
+  { name: 'WordPress', description: 'Système de gestion de contenu (CMS) open source', category: 'Web' },
+  { name: 'Nextcloud', description: 'Solution de stockage cloud auto-hébergée', category: 'Cloud' },
+  { name: 'Jitsi', description: 'Plateforme de visioconférence open source', category: 'Communication' },
+  { name: 'Mattermost', description: 'Plateforme de collaboration en équipe', category: 'Communication' },
+  { name: 'Gitea', description: 'Forge logicielle auto-hébergée', category: 'Développement' },
+];
   
-  // Retourne les 3 résultats les plus proches
-  export const findMatches = (input: string): string[] => {
+  // Retourne les 3 outils les plus proches avec leurs descriptions
+  export const findMatches = (input: string): OpenSourceTool[] => {
     if (!input) return [];
     
-    // Calcul de distance pour chaque cible
-    const ranked = SEARCH_TARGETS.map(target => ({
-      target,
-      distance: levenshteinDistance(input.toLowerCase(), target.toLowerCase())
-    }));
+    const query = input.toLowerCase();
+    
+    // Calcul de distance pour chaque outil (sur le nom et la catégorie)
+    const ranked = OPEN_SOURCE_TOOLS.map(tool => {
+      const nameDistance = levenshteinDistance(query, tool.name.toLowerCase());
+      const categoryDistance = levenshteinDistance(query, tool.category.toLowerCase());
+      const descriptionMatch = tool.description.toLowerCase().includes(query) ? -5 : 0;
+      
+      // Score combiné (priorité au nom, puis catégorie, bonus si description match)
+      const score = nameDistance * 0.5 + categoryDistance * 0.3 + descriptionMatch;
+      
+      return { tool, score };
+    });
   
-    // Tri par pertinence (distance la plus faible)
-    ranked.sort((a, b) => a.distance - b.distance);
+    // Tri par pertinence (score le plus faible)
+    ranked.sort((a, b) => a.score - b.score);
   
     // On retourne le top 3
-    return ranked.slice(0, 3).map(item => item.target);
+    return ranked.slice(0, 3).map(item => item.tool);
   };
   
   // Algorithme de distance de Levenshtein (standard)

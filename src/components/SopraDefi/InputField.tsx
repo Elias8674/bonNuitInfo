@@ -32,9 +32,10 @@ export const InputField = ({ onSearchStart }: InputFieldProps) => {
       display: 'flex', 
       flexDirection: 'column', 
       alignItems: 'center', 
-      justifyContent: 'center', 
-      height: '100%', 
+      justifyContent: 'flex-start', 
+      height: 'auto', 
       width: '100%',
+      padding: '1rem 0',
       fontFamily: 'Arial, sans-serif'
     }}>
       
@@ -60,7 +61,7 @@ export const InputField = ({ onSearchStart }: InputFieldProps) => {
             value={value}
             onChange={(e) => setValue(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Rechercher..." 
+            placeholder="Recherche ton outil opensource" 
             style={{
               width: '100%',
               padding: '15px 50px 15px 25px',
@@ -74,7 +75,9 @@ export const InputField = ({ onSearchStart }: InputFieldProps) => {
               transition: 'box-shadow 0.2s',
               boxSizing: 'border-box'
             }}
-            onFocus={(e) => e.target.style.boxShadow = '0 1px 6px rgba(32,33,36,.28), 0 2px 4px rgba(0,0,0,0.1)'}
+            onFocus={(e) => {
+              e.target.style.boxShadow = '0 1px 6px rgba(32,33,36,.28), 0 2px 4px rgba(0,0,0,0.1)';
+            }}
             onBlur={(e) => e.target.style.boxShadow = '0 1px 6px rgba(32,33,36,.28)'}
             autoFocus
           />
