@@ -25,3 +25,6 @@ Le projet bonNuitInfo, développé pour la communauté **NIRD** (Numérique Incl
 - **Sobriété fonctionnelle** :
   - Pas de vidéos auto-lancées, pas de tracking, pas de cookies
   - Fonctionnalités pensées pour l’utilité réelle, pas de surenchère technique
+
+Nous avons cherché à réaliser un site web réellement utile servant une cause importante (un numérique plus inclusif, responsable et durable qui s'affranchit des Big Tech). Tout en prenant soin durant la réalisation de limiter notre impact environnemental et de le rendre accessible à tous.
+L'intégration de plusieurs outils (diagnostic et mini-jeux) sert aussi à rendre le tout plus clair et accessible auprès d'un public plus large et non expert.
