@@ -124,9 +124,9 @@ export const GameCanvas = ({ bossName, onBossDefeated, onPlayerDefeated }: GameC
           ctx.moveTo(0, groundY); ctx.lineTo(dimensions.w, groundY);
           ctx.stroke();
 
-          // Entités
-          renderPlayer({ player: gameState.player, ctx, animationFrame: animationFrameRef.current });
+          // Entités (boss en premier pour qu'il soit derrière le joueur)
           renderBoss({ boss: gameState.boss, ctx, animationFrame: animationFrameRef.current });
+          renderPlayer({ player: gameState.player, ctx, animationFrame: animationFrameRef.current });
 
           // HUD
           const barW = dimensions.w * 0.4;

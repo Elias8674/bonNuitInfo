@@ -313,8 +313,17 @@ export const FZeroCanvas = ({ onClose, onWin, bossName = 'Boss' }: FZeroCanvasPr
       {/* Message Fin */}
       {hud.isGameOver && (
         <div style={{ 
-          position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', 
-          width: '100%', textAlign: 'center', zIndex: 20
+          position: 'fixed', 
+          top: 0, 
+          left: 0, 
+          width: '100vw', 
+          height: '100vh',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          textAlign: 'center', 
+          zIndex: 200,
+          pointerEvents: 'none'
         }}>
           <div style={{
             fontSize: '8vw', fontWeight: '900', fontFamily: 'Impact', 

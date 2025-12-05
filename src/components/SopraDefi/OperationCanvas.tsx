@@ -27,6 +27,7 @@ export const OperationCanvas = ({ bossName, onWin, onLose }: OperationCanvasProp
   const [isGameRunning, setIsGameRunning] = useState(false);
   
   const [dimensions, setDimensions] = useState({ width: window.innerWidth, height: window.innerHeight });
+  const cursorVibrationRef = useRef({ active: false, endTime: 0, intensity: 0 });
 
   useEffect(() => {
     const handleResize = () => setDimensions({ width: window.innerWidth, height: window.innerHeight });
@@ -70,6 +71,7 @@ export const OperationCanvas = ({ bossName, onWin, onLose }: OperationCanvasProp
 
     let animationFrameId: number;
     let isDamaged = false;
+    let lastVibrationTrigger = 0;
 
     const render = () => {
       let shakeX = 0;
@@ -82,12 +84,32 @@ export const OperationCanvas = ({ bossName, onWin, onLose }: OperationCanvasProp
         
         prevMousePos.current = { x: mousePos.x, y: mousePos.y };
 
+        const now = Date.now();
+        
+        // Vibration aléatoire du curseur de temps en temps (toutes les 3-8 secondes)
+        if (now - lastVibrationTrigger > 3000 && Math.random() < 0.01) {
+          cursorVibrationRef.current = {
+            active: true,
+            endTime: now + 500 + Math.random() * 500, // 500-1000ms de vibration
+            intensity: 15 + Math.random() * 10 // Intensité 15-25
+          };
+          lastVibrationTrigger = now;
+        }
+
+        // Appliquer la vibration aléatoire si active
+        if (cursorVibrationRef.current.active && now < cursorVibrationRef.current.endTime) {
+          shakeX += (Math.random() - 0.5) * cursorVibrationRef.current.intensity;
+          shakeY += (Math.random() - 0.5) * cursorVibrationRef.current.intensity;
+        } else if (cursorVibrationRef.current.active) {
+          cursorVibrationRef.current.active = false;
+        }
+
         if (isDamaged) {
-          shakeX = (Math.random() - 0.5) * 20;
-          shakeY = (Math.random() - 0.5) * 20;
+          shakeX += (Math.random() - 0.5) * 20;
+          shakeY += (Math.random() - 0.5) * 20;
         } else if (isMoving) {
-          shakeX = (Math.random() - 0.5) * 5;
-          shakeY = (Math.random() - 0.5) * 5;
+          shakeX += (Math.random() - 0.5) * 5;
+          shakeY += (Math.random() - 0.5) * 5;
         }
       }
       
@@ -144,7 +166,8 @@ export const OperationCanvas = ({ bossName, onWin, onLose }: OperationCanvasProp
       const isSafe = pixel[0] > 100 && pixel[1] > 100 && pixel[2] > 100;
 
       if (isGameRunning && !isSafe && !gameWon && !gameOver) {
-        setHealth(prev => Math.max(0, prev - 0.5));
+        // Dégâts augmentés : 1.5 par frame au lieu de 0.5
+        setHealth(prev => Math.max(0, prev - 1.5));
         isDamaged = true;
       } else {
         isDamaged = false;
@@ -265,15 +288,16 @@ export const OperationCanvas = ({ bossName, onWin, onLose }: OperationCanvasProp
         <div 
             onClick={handleStartGame}
             style={{
-                position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
+                position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh',
                 background: 'rgba(0, 0, 0, 0.6)',
                 display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-                zIndex: 100, cursor: 'pointer'
+                zIndex: 100, cursor: 'pointer', padding: '20px', boxSizing: 'border-box'
             }}
         >
             <h1 style={{
                 color: '#0f0', fontFamily: 'monospace', fontSize: '3rem', 
-                textAlign: 'center', marginBottom: '40px', textShadow: '0 0 20px #0f0'
+                textAlign: 'center', marginBottom: '40px', textShadow: '0 0 20px #0f0',
+                maxWidth: '90%'
             }}>
                 PROTOCOLE D'EXTRACTION
             </h1>
@@ -282,11 +306,13 @@ export const OperationCanvas = ({ bossName, onWin, onLose }: OperationCanvasProp
                 padding: '20px 60px', border: '3px solid #fff', borderRadius: '50px',
                 background: 'rgba(255,255,255,0.1)',
                 animation: 'pulse 1.5s infinite',
-                backdropFilter: 'blur(5px)'
+                backdropFilter: 'blur(5px)',
+                textAlign: 'center',
+                whiteSpace: 'nowrap'
             }}>
                 CLIQUER POUR COMMENCER LE HACKING
             </div>
-            <p style={{color: '#fff', marginTop: '20px', fontSize: '1.2rem', textShadow: '0 0 5px black'}}>
+            <p style={{color: '#fff', marginTop: '20px', fontSize: '1.2rem', textShadow: '0 0 5px black', textAlign: 'center', maxWidth: '600px'}}>
                 Analysez le chemin ci-dessous avant de commencer.
             </p>
         </div>

@@ -36,7 +36,7 @@ export const createBoss = (name: string, x: number, y: number): Boss => {
     x,
     y,
     width: 400,
-    height: 500,
+    height: 350,
     health: dynamicHealth,
     maxHealth: dynamicHealth,
     name,

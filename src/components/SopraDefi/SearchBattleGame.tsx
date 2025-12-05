@@ -129,10 +129,13 @@ export const SearchBattleGame = () => {
       {gameStage === 'racing' && (
         <div style={{
           position: 'fixed',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          width: '100%',
+          top: 0,
+          left: 0,
+          width: '100vw',
+          height: '100vh',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
           textAlign: 'center',
           zIndex: 100, // Au-dessus du canvas
           pointerEvents: 'none' // Pour ne pas bloquer les interactions
