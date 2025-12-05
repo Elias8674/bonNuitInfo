@@ -1,4 +1,5 @@
 import './DiagnosticFix.css';
+import { Link } from 'react-router-dom';
 
 export default function DiagnosticFix() {
   return (
@@ -8,7 +9,9 @@ export default function DiagnosticFix() {
           Faites un diagnostic et découvrez quelles actions mettre en œuvre pour adopter une nouvelle démarche
         </div>
         <div className="diagnostic-action">
-          <button className="btn-diagnostic">Réaliser un diagnostic</button>
+          <Link to="/diagnostic">
+            <button className="btn-diagnostic">Réaliser un diagnostic</button>
+          </Link>
         </div>
       </div>
     </div>

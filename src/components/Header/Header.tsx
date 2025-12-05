@@ -1,4 +1,5 @@
 import './Header.css';
+import { Link } from 'react-router-dom';
 
 export default function Header() {
   return (
@@ -15,7 +16,9 @@ export default function Header() {
           </ul>
         </nav>
         <div className="header-actions">
-          <button className="btn-diagnostic">Réaliser un diagnostic</button>
+          <Link to="/diagnostic">
+            <button className="btn-diagnostic">Réaliser un diagnostic</button>
+          </Link>
         </div>
       </div>
     </header>
