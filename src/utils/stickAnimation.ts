@@ -33,10 +33,10 @@ class StickAnimation {
       ...SUPER_ATTACK_FRAMES,
     ];
 
-    // Charger toutes les frames depuis npc1
+    // Charger toutes les frames depuis npc1 (dans public)
     for (const frameNum of allFrames) {
       const frameStr = frameNum.toString().padStart(4, '0');
-      const path = `/src/assets/stickman/npc1/stickMan${frameStr}.png`;
+      const path = `/assets/stickman/npc1/stickMan${frameStr}.png`;
       
       const promise = new Promise<void>((resolve) => {
         const img = new Image();

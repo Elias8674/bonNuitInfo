@@ -13,9 +13,9 @@ class AssetLoader {
   async loadAssets(): Promise<void> {
     if (this.loaded) return;
 
-    // Charger les images disponibles
+    // Charger les images disponibles (depuis public)
     const imagePaths = [
-      '/src/assets/stickmin/未命名-2/LIBRARY/gun.png',
+      '/assets/stickmin/未命名-2/LIBRARY/gun.png',
     ];
 
     const loadPromises = imagePaths.map(path => {

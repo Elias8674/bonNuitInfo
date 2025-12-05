@@ -125,16 +125,17 @@ export const SearchBattleGame = () => {
       background: gameStage === 'input' ? 'transparent' : '#000'
     }}>
       
-      {/* BACKGROUND TEXT FOR F-ZERO (Visible derrière le jeu transparent) */}
+      {/* BACKGROUND TEXT FOR F-ZERO (Visible au-dessus du canvas) */}
       {gameStage === 'racing' && (
         <div style={{
-          position: 'absolute',
+          position: 'fixed',
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
           width: '100%',
           textAlign: 'center',
-          zIndex: 0 // Derrière le canvas
+          zIndex: 100, // Au-dessus du canvas
+          pointerEvents: 'none' // Pour ne pas bloquer les interactions
         }}>
           <div style={{
             fontSize: '3rem',
