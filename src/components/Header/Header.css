@@ -1,0 +1,141 @@
+.header {
+  background: #FBF9F7;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  font-family: 'Inter', sans-serif;
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
+}
+
+.logo h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #000;
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+.nav {
+  flex: 1;
+}
+
+.nav-list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 2rem;
+}
+
+.nav-list a {
+  color: #000;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.nav-list a:hover {
+  color: #666;
+}
+
+.nav-list a::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #000;
+  transition: width 0.3s ease;
+}
+
+.nav-list a:hover::after {
+  width: 100%;
+}
+
+.header-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.btn-diagnostic {
+  padding: 0.6rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: #000;
+  color: white;
+}
+
+.btn-diagnostic:hover {
+  background: #333;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header-container {
+    gap: 1rem;
+  }
+
+  .nav-list {
+    gap: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .btn-diagnostic {
+    padding: 0.5rem 1.2rem;
+    font-size: 0.9rem;
+  }
+
+  .logo h1 {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    height: auto;
+    padding: 0.5rem 0;
+  }
+
+  .header-container {
+    padding: 0 1rem;
+    flex-wrap: wrap;
+  }
+
+  .nav-list {
+    gap: 0.8rem;
+    font-size: 0.8rem;
+  }
+
+  .logo h1 {
+    font-size: 1rem;
+  }
+
+  .btn-diagnostic {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+}
