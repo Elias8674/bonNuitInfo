@@ -1,0 +1,160 @@
+[
+  {
+    "conditions": { "age_pc": "plus_8" },
+    "result": "PC de plus de 8 ans : Windows non recommandé. Privilégier Linux ou remplacement."
+  },
+  {
+    "conditions": { "age_pc": "5_8" },
+    "result": "PC de 5 à 8 ans : Windows 11 possible si compatible, sinon Linux ou upgrade."
+  },
+  {
+    "conditions": { "age_pc": "3_5" },
+    "result": "PC de 3 à 5 ans : Migration vers Windows 11 généralement possible."
+  },
+  {
+    "conditions": { "age_pc": "moins_3" },
+    "result": "PC de moins de 3 ans : migration Windows 11 conseillée."
+  },
+
+
+  {
+    "conditions": { "logiciels_indispensables": "office_local" },
+    "result": "Office local obligatoire → Windows 11 recommandé."
+  },
+  {
+    "conditions": { "logiciels_indispensables": "office_365" },
+    "result": "Office 365 web → Linux ou Windows possibles."
+  },
+  {
+    "conditions": { "logiciels_indispensables": "windows_only" },
+    "result": "Logiciels Windows propriétaires → Windows obligatoire."
+  },
+  {
+    "conditions": { "logiciels_indispensables": "multiplateforme" },
+    "result": "Logiciels multiplateformes → Linux ou Windows."
+  },
+  {
+    "conditions": { "logiciels_indispensables": "aucun" },
+    "result": "Aucun logiciel spécifique → Linux ou Windows."
+  },
+
+  {
+    "conditions": { "usage_principal": "bureautique" },
+    "result": "Usage bureautique ou pédagogique : Linux parfaitement adapté, même sur vieux matériels."
+  },
+  {
+    "conditions": { "usage_principal": "metier_legers" },
+    "result": "Applicatifs métier légers : Linux si outils compatibles, sinon Windows."
+  },
+  {
+    "conditions": { "usage_principal": "metier_lourds" },
+    "result": "Applicatifs lourds : Windows 11 + matériel récent. Remplacement à envisager si PC faible."
+  },
+  {
+    "conditions": { "usage_principal": "pedagogique" },
+    "result": "Usage pédagogique : Linux ou Windows."
+  },
+
+  {
+    "conditions": { "budget": "tres_faible" },
+    "result": "Budget très faible : privilégier Linux + léger upgrade (SSD/RAM)."
+  },
+  {
+    "conditions": { "budget": "faible" },
+    "result": "Budget faible : Linux recommandé. Upgrade matériel léger possible."
+  },
+  {
+    "conditions": { "budget": "moyen" },
+    "result": "Budget moyen : mise à niveau (SSD/RAM) + migration Windows 11 ou Linux."
+  },
+  {
+    "conditions": { "budget": "complet" },
+    "result": "Budget complet : remplacement du PC recommandé. Windows 11 idéal."
+  },
+
+  {
+    "conditions": { "age_pc": "plus_8", "os_actuel": "win10" },
+    "result": "PC >8 ans sous Windows 10 → remplacement conseillé + Windows 11, sinon Linux."
+  },
+  {
+    "conditions": { "age_pc": "plus_8", "os_actuel": "win7_8" },
+    "result": "PC >8 ans sous Windows 7/8 → remplacement recommandé ou Linux léger."
+  },
+  {
+    "conditions": { "age_pc": "plus_8", "os_actuel": "win11" },
+    "result": "PC >8 ans sous Windows 11 → RAS mais performances probablement limitées."
+  },
+  {
+    "conditions": { "age_pc": "5_8", "os_actuel": "win10" },
+    "result": "PC 5–8 ans sous Windows 10 → upgrade ou Windows 11 si compatible."
+  },
+  {
+    "conditions": { "age_pc": "3_5", "os_actuel": "win10" },
+    "result": "PC 3–5 ans sous Windows 10 → migration Windows 11 ou upgrade léger."
+  },
+  {
+    "conditions": { "age_pc": "moins_3", "os_actuel": "win10" },
+    "result": "PC <3 ans sous Windows 10 → migration Windows 11 recommandée."
+  },
+
+  {
+    "conditions": {
+      "logiciels_indispensables": "windows_only",
+      "age_pc": "plus_8"
+    },
+    "result": "Windows obligatoire mais PC trop vieux → remplacement nécessaire."
+  },
+  {
+    "conditions": {
+      "logiciels_indispensables": "windows_only",
+      "age_pc": "5_8"
+    },
+    "result": "Windows obligatoire → vérifier compatibilité W11 sinon remplacement."
+  },
+  {
+    "conditions": {
+      "logiciels_indispensables": "windows_only",
+      "age_pc": "3_5"
+    },
+    "result": "Windows obligatoire → migration Windows 11 recommandée."
+  },
+  {
+    "conditions": {
+      "logiciels_indispensables": "windows_only",
+      "age_pc": "moins_3"
+    },
+    "result": "Windows obligatoire → passage Windows 11."
+  },
+
+
+  {
+    "conditions": { "os_actuel": "mac", "budget": "moyen" },
+    "result": "Mac + budget moyen → achat PC + Windows 11 conseillé."
+  },
+  {
+    "conditions": { "os_actuel": "mac", "budget": "faible" },
+    "result": "Mac + budget faible → passer sous Linux (si applicable)."
+  },
+
+  {
+    "conditions": {
+      "age_pc": "plus_8",
+      "logiciels_indispensables": "aucun"
+    },
+    "result": "PC >8 ans sans besoins → Linux léger parfait."
+  },
+  {
+    "conditions": {
+      "age_pc": "plus_8",
+      "logiciels_indispensables": "multiplateforme"
+    },
+    "result": "PC >8 ans → Linux recommandé."
+  },
+  {
+    "conditions": {
+      "age_pc": "5_8",
+      "usage_principal": "bureautique"
+    },
+    "result": "PC 5–8 ans pour bureautique → Linux idéal."
+  }
+]
