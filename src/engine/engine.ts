@@ -48,10 +48,11 @@ export class GameEngine {
     const groundY = height - 50;
     
     this.player = createPlayer(200, groundY - 300 - 30);
-    this.player.groundY = groundY - 300 - 30; 
+    this.player.groundY = groundY - 390 - 30; 
     this.player.speed = 20; 
 
-    this.boss = createBoss(bossName, width - 600, groundY - 500 - 30);
+    // Boss positionné au sol : groundY - height (350) pour que ses pieds touchent le sol
+    this.boss = createBoss(bossName, width - 600, groundY - 350);
     this.boss.lasers = [];
   }
 

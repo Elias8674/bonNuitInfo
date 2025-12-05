@@ -63,9 +63,8 @@ export const FZeroCanvas = ({ onClose, onWin, bossName = 'Boss' }: FZeroCanvasPr
       
       const scale = CAMERA_DISTANCE / relZ;
       
-      // AJUSTEMENT VIRAGE : Multiplicateur réduit pour des virages plus doux
-      // Les virages seront visuellement moins "larges" (moins déportés sur le côté)
-      const curveOffset = Math.pow(relZ * 0.01, 2) * curvature * 2.5;
+      // AJUSTEMENT VIRAGE : Multiplicateur augmenté pour des courbes plus visibles
+      const curveOffset = (relZ * 0.01) * curvature * 4;
       
       const screenX = dimensions.width / 2 + (x * ROAD_WIDTH) * scale - curveOffset;
       const screenY = dimensions.height / 2 + (CAMERA_HEIGHT - y) * scale;
@@ -163,8 +162,10 @@ export const FZeroCanvas = ({ onClose, onWin, bossName = 'Boss' }: FZeroCanvasPr
         if (!p) return;
 
         if (item.type === 'obstacle') {
-          const w = 400 * p.scale;
-          const h = 600 * p.scale;
+          // Utiliser la largeur dynamique de l'obstacle (en unités de route, convertie en pixels)
+          const roadWidth = 3000;
+          const w = item.w * roadWidth * p.scale;
+          const h = item.h * p.scale;
           const x = p.x - w/2;
           const y = p.y - h;
 
@@ -230,6 +231,50 @@ export const FZeroCanvas = ({ onClose, onWin, bossName = 'Boss' }: FZeroCanvasPr
 
       ctx.restore();
       ctx.setTransform(1,0,0,1,0,0);
+
+      // Message de fin rendu dans le canvas
+      if (gameState.isGameOver && gameState.hasWon) {
+        ctx.save();
+        // Fond semi-transparent
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+        ctx.fillRect(0, 0, dimensions.width, dimensions.height);
+        
+        // Texte centré
+        ctx.fillStyle = '#00ff00';
+        ctx.font = 'bold 60px Impact';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.shadowColor = '#000';
+        ctx.shadowBlur = 20;
+        
+        const centerX = dimensions.width / 2;
+        const centerY = dimensions.height / 2;
+        
+        ctx.fillText('ENTRÉE DANS LE SYSTÈME...', centerX, centerY - 30);
+        
+        ctx.font = 'bold 30px Arial';
+        ctx.fillStyle = '#fff';
+        ctx.fillText('Initialisation du piratage', centerX, centerY + 30);
+        
+        ctx.restore();
+      } else if (gameState.isGameOver && !gameState.hasWon) {
+        ctx.save();
+        // Fond semi-transparent
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+        ctx.fillRect(0, 0, dimensions.width, dimensions.height);
+        
+        // Texte centré
+        ctx.fillStyle = '#ff0000';
+        ctx.font = 'bold 60px Impact';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.shadowColor = '#000';
+        ctx.shadowBlur = 20;
+        
+        ctx.fillText('ÉCHEC DE LA POURSUITE', dimensions.width / 2, dimensions.height / 2);
+        
+        ctx.restore();
+      }
     };
 
     const gameLoop = (currentTime: number) => {
@@ -310,25 +355,6 @@ export const FZeroCanvas = ({ onClose, onWin, bossName = 'Boss' }: FZeroCanvasPr
         <div style={{ color: '#fff', fontFamily: 'Arial', fontWeight: 'bold', fontSize: '30px' }}>{hud.bossName}</div>
       </div>
 
-      {/* Message Fin */}
-      {hud.isGameOver && (
-        <div style={{ 
-          position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', 
-          width: '100%', textAlign: 'center', zIndex: 20
-        }}>
-          <div style={{
-            fontSize: '8vw', fontWeight: '900', fontFamily: 'Impact', 
-            color: hud.hasWon ? '#00ff00' : '#ff0000',
-            textShadow: '0 0 20px rgba(0,0,0,0.8), 5px 5px 0 #000',
-            transform: 'skew(-10deg)',
-            animation: 'pulse 0.5s infinite alternate'
-          }}>
-            {hud.hasWon ? 
-              <div>ENTRÉE DANS LE SYSTÈME...<br/><span style={{fontSize:'4vw', color: '#fff'}}>Initialisation du piratage</span></div> 
-              : "ÉCHEC DE LA POURSUITE"}
-          </div>
-        </div>
-      )}
 
       {onClose && (
         <button onClick={onClose} style={{ position: 'absolute', top: 20, right: 20, zIndex: 30, padding: '10px 20px', background:'#fff', border:'none', borderRadius: '4px', cursor:'pointer', fontWeight:'bold', color: '#000' }}>
