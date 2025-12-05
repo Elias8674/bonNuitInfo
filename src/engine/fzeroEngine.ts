@@ -59,8 +59,11 @@ export class FZeroEngine {
   }
 
   private spawnObstacle(): void {
-    const nameLen = this.boss.name.length;
-    const dynamicWidth = Math.min(0.6, 0.15 + (nameLen * 0.015));
+    // Limiter à 10 caractères max pour les calculs d'obstacles
+    const nameLen = Math.min(10, this.boss.name.length);
+    // Taille des obstacles : beaucoup plus grande avec les longs noms
+    // Base 0.15, +0.04 par lettre, max 0.8 (au lieu de 0.6)
+    const dynamicWidth = Math.min(0.8, 0.15 + (nameLen * 0.04));
 
     this.obstacles.push({
       id: `obstacle-${this.obstacleIdCounter++}`,
@@ -88,8 +91,8 @@ export class FZeroEngine {
         this.targetCurvature = (Math.random() - 0.5) * 0.8; 
       }
     }
-    // Transition plus douce (réduit de 0.01 à 0.003 pour des virages moins brusques)
-    this.roadCurvature += (this.targetCurvature - this.roadCurvature) * 0.003;
+    // Transition de courbure plus rapide pour des virages visibles
+    this.roadCurvature += (this.targetCurvature - this.roadCurvature) * 0.02;
 
     // --- CONTRÔLES ---
     let steering = 0;
@@ -111,7 +114,7 @@ export class FZeroEngine {
 
     // --- VITESSE ---
     if (keys.has('arrowup') || keys.has('z') || keys.has('w')) {
-      this.car.speed = Math.min(8.0, this.car.speed + 0.1); 
+      this.car.speed = Math.min(9.99, this.car.speed + 0.1); 
     } else if (keys.has('arrowdown') || keys.has('s')) {
       this.car.speed = Math.max(0, this.car.speed - 0.2);
     } else {
@@ -119,7 +122,9 @@ export class FZeroEngine {
     }
 
     // --- DISTANCE & VITESSE BOSS ---
-    const bossSpeed = Math.max(1.5, 3.5 - (nameLen * 0.1));
+    // Boss beaucoup plus lent avec les longs noms
+    // Vitesse de base 3.5, -0.15 par lettre, minimum 0.5 (au lieu de 1.5)
+    const bossSpeed = Math.max(0.5, 3.5 - (nameLen * 0.15));
     const relativeSpeed = this.car.speed - bossSpeed;
     
     if (this.car.z > 0 || this.car.speed > 0) {
@@ -136,8 +141,13 @@ export class FZeroEngine {
     this.bossMoveTimer += 0.05;
     this.boss.x = 0.5 + Math.sin(this.bossMoveTimer) * 0.4 - (this.roadCurvature * 0.1);
 
-    const baseRate = Math.max(10, Math.floor(this.distanceToBoss / 300));
-    const extraDelay = Math.min(60, nameLen * 3);
+    // Taux de spawn : plus d'obstacles avec les longs noms (plus difficile)
+    // Limiter à 10 caractères max pour les calculs
+    const obstacleNameLen = Math.min(10, nameLen);
+    // Base 10, mais on réduit le délai avec les longs noms au lieu de l'augmenter
+    const baseRate = Math.max(5, Math.floor(this.distanceToBoss / 300));
+    // Avec les longs noms, on spawn plus souvent (délai réduit)
+    const extraDelay = Math.max(0, 30 - (obstacleNameLen * 1.5));
     const dynamicSpawnRate = baseRate + extraDelay;
 
     this.boss.spawnTimer++;

@@ -120,11 +120,9 @@ export const OperationCanvas = ({ bossName, onWin, onLose }: OperationCanvasProp
       ctx.fillStyle = '#050505';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // --- DYNAMIQUE : LARGEUR DU CHEMIN (LIMITÉE) ---
-      // Min 45px, Max 130px.
-      // Cela évite que le chemin devienne trop facile avec des mots longs.
-      const rawWidth = 30 + (bossName.length * 10);
-      const pathWidth = Math.min(130, Math.max(45, rawWidth));
+      // --- LARGEUR FIXE DU CHEMIN ---
+      // Largeur très basse fixe, peu importe la longueur du nom
+      const pathWidth = 50;
 
       // CHEMINS
       const numPaths = Math.max(2, Math.ceil(letters.length / 2));
@@ -157,7 +155,23 @@ export const OperationCanvas = ({ bossName, onWin, onLose }: OperationCanvasProp
       ctx.strokeStyle = '#eee';
       if (letters.length > 0) {
         ctx.moveTo(0, canvas.height/2);
-        letters.forEach(l => ctx.lineTo(l.x, l.y));
+        // Utiliser des courbes de Bézier pour un chemin plus fluide
+        for (let i = 0; i < letters.length; i++) {
+          const letter = letters[i];
+          if (i === 0) {
+            // Premier point : ligne droite vers la première lettre
+            ctx.lineTo(letter.x, letter.y);
+          } else {
+            // Points suivants : courbes de Bézier pour un chemin fluide
+            const prevLetter = letters[i - 1];
+            // Points de contrôle pour la courbe
+            const controlX1 = prevLetter.x + (letter.x - prevLetter.x) * 0.3;
+            const controlY1 = prevLetter.y + (letter.y - prevLetter.y) * 0.3;
+            const controlX2 = prevLetter.x + (letter.x - prevLetter.x) * 0.7;
+            const controlY2 = prevLetter.y + (letter.y - prevLetter.y) * 0.7;
+            ctx.bezierCurveTo(controlX1, controlY1, controlX2, controlY2, letter.x, letter.y);
+          }
+        }
         ctx.stroke();
       }
 
@@ -308,7 +322,11 @@ export const OperationCanvas = ({ bossName, onWin, onLose }: OperationCanvasProp
                 animation: 'pulse 1.5s infinite',
                 backdropFilter: 'blur(5px)',
                 textAlign: 'center',
-                whiteSpace: 'nowrap'
+                whiteSpace: 'nowrap',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                margin: '0 auto'
             }}>
                 CLIQUER POUR COMMENCER LE HACKING
             </div>
