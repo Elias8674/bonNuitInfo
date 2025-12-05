@@ -1,7 +1,7 @@
 // src/App.tsx
 import './App.css';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { SearchBattleGame } from './components/SopraDefi/SearchBattleGame';
+import Diagnostic from './pages/diagnostic/Diagnostic.tsx';
 import { HexRTSCanvas } from './components/Game/HexRTSCanvas';
 
 function App() {
@@ -10,8 +10,8 @@ function App() {
       <Routes>
         <Route path="/" element={
           <div className="app-container" style={{width: '100vw', height: '100vh', overflow: 'hidden'}}>
-            <SearchBattleGame />
-          </div>
+        <Diagnostic />
+      </div>
         } />
         <Route path="/rts" element={
           <div className="app-container" style={{width: '100vw', height: '100vh', overflow: 'hidden'}}>
@@ -21,14 +21,6 @@ function App() {
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
-import Diagnostic from './pages/diagnostic/Diagnostic.tsx';
-
-function App() {
-  return (
-    // Suppression du background noir ici pour permettre la transparence
-    <div className="app-container" style={{width: '100vw', height: '100vh', overflow: 'hidden'}}>
-      <Diagnostic />
-    </div>
   );
 }
 
