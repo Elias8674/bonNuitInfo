@@ -4,6 +4,7 @@ import questionsData from '../../data/questions.json';
 import rulesData from '../../data/rules.json';
 import ServiceDiagnostic from '../../services/ServiceDiagnostic.tsx';
 import Rapport from '../rapport/Rapport';
+import Header from '../../components/Header/Header';
 
 type Option = { id: string; label: string; hint?: string };
 type Question = { id: string; label: string; options: Option[] };
@@ -49,12 +50,19 @@ const Diagnostic = () => {
     };
 
     if (showResults) {
-        return <Rapport results={results} onBack={() => setShowResults(false)} />;
+        return (
+            <>
+                <Header />
+                <Rapport results={results} onBack={() => setShowResults(false)} />
+            </>
+        );
     }
 
 
     return (
-        <div className={"diagnostic_container"}>
+        <>
+            <Header />
+            <div className={"diagnostic_container"}>
 
             <div className={"diagnostic_container_content"}>
                 <div className={"diagnostic_text_base"}>Question {question + 1} / {nbQuestions}</div>
@@ -104,6 +112,7 @@ const Diagnostic = () => {
                 </div>
             </div>
         </div>
+        </>
     );
 };
 
